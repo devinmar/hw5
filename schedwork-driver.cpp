@@ -14,39 +14,28 @@ using namespace std;
 
 void printSchedule(const DailySchedule& sched);
 
-int main()
-{
-    // Replace the matrix below with your test case
-    AvailabilityMatrix avail = { 
-        {1, 1, 1, 1},
-        {1, 0, 1, 0},
-        {1, 1, 0, 1},
-        {1, 0, 0, 1}
+int main() {
+    AvailabilityMatrix avail = {
+        {true, true, true, true},
+        {true, false, true, false},
+        {true, true, false, true},
+        {true, false, false, true}
     };
+
     DailySchedule sched;
     bool solutionFound = schedule(avail, 2, 2, sched);
-    if(solutionFound)
-    {
-        printSchedule(sched);
-    }
-    else
-    {
+
+    if (solutionFound) {
+        for (size_t i = 0; i < sched.size(); ++i) {
+            cout << "Day " << i << ": ";
+            for (size_t j = 0; j < sched[i].size(); ++j) {
+                cout << sched[i][j] << " ";
+            }
+            cout << endl;
+        }
+    } else {
         cout << "No solution found!" << endl;
     }
-    return 0;
-}
 
-void printSchedule(const DailySchedule& sched)
-{
-    int day = 0;
-    for(auto s : sched)
-    {
-        cout << "Day " << day << ": ";
-        for(auto nurse : s)
-        {
-            cout << nurse << " ";
-        }
-        cout << endl;
-        day++;
-    }
+    return 0;
 }
